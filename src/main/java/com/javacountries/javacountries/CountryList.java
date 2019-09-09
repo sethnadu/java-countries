@@ -223,6 +223,17 @@ public class CountryList
         return null;
     }
 
-
+    public ArrayList<Country> findCountries(CheckCountry tester)
+    {
+        ArrayList<Country> tempCountriesList = new ArrayList<>();
+        for (Country c : countryList)
+        {
+            if (tester.test(c))
+            {
+                tempCountriesList.add(c);
+            }
+        }
+        return tempCountriesList;
+    }
 
 }
