@@ -53,7 +53,5 @@ public class PopulationController
         return new ResponseEntity<>(returnCountryMedianPopulation.get(median), HttpStatus.OK);
     }
 
-
-
 }
 

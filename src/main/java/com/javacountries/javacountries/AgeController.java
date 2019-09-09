@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
+// STRETCH
 @RestController
 @RequestMapping("/age")
 public class AgeController
@@ -19,7 +21,8 @@ public class AgeController
     {
         ArrayList<Country> returnAgeEqualOrGreaterThan = JavaCountriesApplication.theCountryList
                 .findCountries(c -> c.getAge() >= age);
-        returnAgeEqualOrGreaterThan.sort((c1, c2) -> (int)(c1.getAge() - c2.getAge()));
+        returnAgeEqualOrGreaterThan.sort(Comparator.comparingInt(Country::getAge));
+//        returnAgeEqualOrGreaterThan.sort((c1, c2) -> (int)(c1.getAge() - c2.getAge()));
         return new ResponseEntity<>(returnAgeEqualOrGreaterThan, HttpStatus.OK);
     }
 
@@ -28,7 +31,8 @@ public class AgeController
     public ResponseEntity<?> getMinAge()
     {
         ArrayList<Country> returnMinAge = JavaCountriesApplication.theCountryList.countryList;
-        returnMinAge.sort((c1, c2) -> (int)(c1.getAge() - c2.getAge()));
+        returnMinAge.sort(Comparator.comparingInt(Country::getAge));
+//        returnMinAge.sort((c1, c2) -> (int)(c1.getAge() - c2.getAge()));
         return new ResponseEntity<>(returnMinAge.get(0), HttpStatus.OK);
     }
 
@@ -37,7 +41,8 @@ public class AgeController
     public ResponseEntity<?> getMaxAge()
     {
         ArrayList<Country> returnMaxAge = JavaCountriesApplication.theCountryList.countryList;
-        returnMaxAge.sort((c1, c2) -> (int)(c2.getAge() - c1.getAge()));
+        returnMaxAge.sort((c1, c2) -> (c2.getAge() - c1.getAge()));
+//        returnMaxAge.sort((c1, c2) -> (int)(c2.getAge() - c1.getAge()));
         return new ResponseEntity<>(returnMaxAge.get(0), HttpStatus.OK);
     }
 
@@ -47,7 +52,8 @@ public class AgeController
     public ResponseEntity<?> getMedianAge()
     {
         ArrayList<Country> returnCountryMedianAge = JavaCountriesApplication.theCountryList.countryList;
-        returnCountryMedianAge.sort((c1, c2) -> (int)(c1.getAge() - c2.getAge()));
+        returnCountryMedianAge.sort(Comparator.comparingInt(Country::getAge));
+//        returnCountryMedianAge.sort((c1, c2) -> (int)(c1.getAge() - c2.getAge()));
         int medianAge;
         medianAge = returnCountryMedianAge.size() / 2;
         return new ResponseEntity<>(returnCountryMedianAge.get(medianAge), HttpStatus.OK);
